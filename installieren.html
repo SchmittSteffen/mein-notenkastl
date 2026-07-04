@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mein Notenkastl – Installationsanleitung</title>
+<meta name="description" content="So installierst du Mein Notenkastl auf deinem Smartphone oder Tablet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="48x48" href="Icons/icon-48-mdpi.png">
+<style>
+  .guide { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+  .hero { text-align: center; padding: 1rem 0 2rem; }
+  .hero .logo { width: 5rem; height: 5rem; }
+  .hero h1 { font-size: 1.7rem; font-weight: 800; margin: 1rem 0 0.3rem; }
+  .hero .tagline { font-size: 0.95rem; opacity: 0.7; margin: 0; }
+
+  .cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: var(--accent);
+    color: var(--header-text);
+    border: 1px solid var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.9rem 1.5rem;
+    margin: 1.5rem 0 0.6rem;
+  }
+  .cta:hover { background: var(--accent-dark); }
+  .cta-url {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    word-break: break-all;
+    margin: 0 0 2rem;
+  }
+
+  h2.section-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--heading);
+    margin: 2.2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .platforms { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .platform-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 1.1rem 1.2rem;
+  }
+  .platform-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 0.9rem;
+  }
+  .platform-card h3 .icon { width: 1.2em; height: 1.2em; color: var(--accent); }
+  .platform-card .note {
+    font-size: 0.78rem;
+    color: var(--danger);
+    font-weight: 600;
+    margin: -0.5rem 0 0.8rem;
+  }
+
+  .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--accent);
+    color: var(--header-text);
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-list { list-style: none; margin: 0; padding: 0; }
+  .info-list li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    padding: 0.5rem 0;
+    font-size: 0.92rem;
+    border-bottom: 1px dashed var(--border);
+  }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list .icon { width: 1.2em; height: 1.2em; color: var(--green); flex-shrink: 0; margin-top: 0.15em; }
+
+  @media (max-width: 560px) {
+    .platforms { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide">
+  <div class="hero">
+    <img class="logo" src="Icons/icon-192-xxxhdpi.png" alt="Mein Notenkastl Logo">
+    <h1>Mein Notenkastl</h1>
+    <p class="tagline">Dein Repertoire immer griffbereit</p>
+  </div>
+
+  <a class="cta" href="https://schmittsteffen.github.io/mein-notenkastl/">App jetzt öffnen</a>
+  <p class="cta-url">https://schmittsteffen.github.io/mein-notenkastl/</p>
+
+  <h2 class="section-title">So installierst du die App</h2>
+  <div class="platforms">
+    <div class="platform-card">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Android (Chrome)
+      </h3>
+      <ol class="steps">
+        <li>Link oben öffnen</li>
+        <li>Oben rechts auf die drei Punkte tippen</li>
+        <li>„App installieren“ bzw. „Zum Startbildschirm hinzufügen“ wählen</li>
+        <li>Bestätigen – das Icon erscheint auf dem Homescreen</li>
+      </ol>
+    </div>
+    <div class="platform-card">
+      <h3>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        iPhone / iPad
+      </h3>
+      <p class="note">Nur mit Safari, nicht mit Chrome!</p>
+      <ol class="steps">
+        <li>Link in Safari öffnen</li>
+        <li>Unten auf das Teilen-Symbol tippen</li>
+        <li>Runterscrollen → „Zum Home-Bildschirm“</li>
+        <li>Oben rechts auf „Hinzufügen“ tippen</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2 class="section-title">Gut zu wissen</h2>
+  <ul class="info-list">
+    <li>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+      Jeder hat sein eigenes, privates Repertoire – nichts wird zwischen euch geteilt oder synchronisiert.
+    </li>
+    <li>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+      Einmal geöffnet, funktioniert die App auch ohne Internetverbindung.
+    </li>
+    <li>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.36 6.36-.7-.7M6.34 6.34l-.7-.7m12.72 0-.7.7M6.34 17.66l-.7.7"/><circle cx="12" cy="12" r="4"/></svg>
+      Über das Sonne/Mond-Symbol oben in der App lässt sich zwischen Hell- und Dunkelmodus wechseln.
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>
