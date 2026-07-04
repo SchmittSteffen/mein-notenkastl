@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mein Notenkastl – Was die App kann</title>
+<meta name="description" content="Ein Überblick über alle Funktionen von Mein Notenkastl">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" sizes="48x48" href="Icons/icon-48-mdpi.png">
+<style>
+  .guide { max-width: 760px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+  .hero { text-align: center; padding: 1rem 0 2rem; }
+  .hero .logo { width: 5rem; height: 5rem; }
+  .hero h1 { font-size: 1.7rem; font-weight: 800; margin: 1rem 0 0.3rem; }
+  .hero .tagline { font-size: 0.95rem; opacity: 0.7; margin: 0; }
+
+  .cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: var(--accent);
+    color: var(--header-text);
+    border: 1px solid var(--accent);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 0.9rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .cta:hover { background: var(--accent-dark); }
+
+  .cta-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    font-size: 0.85rem;
+    margin: 0 0 2rem;
+  }
+  .cta-links a { color: var(--info); text-decoration: none; }
+  .cta-links a:hover { text-decoration: underline; }
+
+  h2.section-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--heading);
+    margin: 2.2rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .features { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .feature-card {
+    background: var(--paper);
+    border: 1px solid var(--border);
+    padding: 1.1rem 1.2rem;
+  }
+  .feature-card .icon {
+    width: 1.8rem;
+    height: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .feature-card h3 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+  }
+  .feature-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 560px) {
+    .features { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="guide">
+  <div class="hero">
+    <img class="logo" src="Icons/icon-192-xxxhdpi.png" alt="Mein Notenkastl Logo">
+    <h1>Was kann Mein Notenkastl?</h1>
+    <p class="tagline">Dein Repertoire immer griffbereit</p>
+  </div>
+
+  <a class="cta" href="https://schmittsteffen.github.io/mein-notenkastl/">App jetzt öffnen</a>
+  <div class="cta-links">
+    <a href="installieren.html">Installationsanleitung</a>
+  </div>
+
+  <h2 class="section-title">Funktionen im Überblick</h2>
+  <div class="features">
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <h3>Repertoire verwalten</h3>
+      <p>Jedes Stück mit Titel, Genre, Schwierigkeit und Übe-Status erfassen. Durchsuchbar, filterbar und mit ein-/ausblendbaren Tabellenspalten.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <h3>Setlisten zusammenstellen</h3>
+      <p>Beliebig viele Setlisten anlegen, Stücke per Drag &amp; Drop (oder Pfeil-Buttons) sortieren und bestehende Setlisten duplizieren.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <h3>Wunschliste</h3>
+      <p>Stücke notieren, die du später lernen willst – und mit einem Klick direkt ins Repertoire übernehmen, sobald es losgeht.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      <h3>Drucken &amp; Exportieren</h3>
+      <p>Setlisten direkt ausdrucken oder als PDF speichern. Repertoire, Setlisten und Wunschliste lassen sich zusätzlich als CSV exportieren.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <h3>Backup &amp; Wiederherstellen</h3>
+      <p>Der komplette Datenbestand lässt sich als Datei sichern und auf einem anderen Gerät oder nach einem Neustart wieder einspielen.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <h3>Installierbar</h3>
+      <p>Als App auf dem Homescreen ablegen – läuft im Vollbild ohne Browser-Leiste und funktioniert auch ohne Internetverbindung.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <h3>Hell- &amp; Dunkelmodus</h3>
+      <p>Passt sich automatisch den Geräteeinstellungen an oder lässt sich jederzeit über einen Klick manuell umschalten.</p>
+    </div>
+    <div class="feature-card">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <h3>Privat &amp; lokal</h3>
+      <p>Alle Daten bleiben nur auf deinem eigenen Gerät gespeichert – keine Cloud, kein Account, nichts wird mit anderen geteilt.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
