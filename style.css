@@ -483,6 +483,7 @@ tbody tr:last-child td { border-bottom: none; }
 
 .setlist-main {
   flex: 1;
+  min-width: 0;
   background: var(--paper);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -817,7 +818,16 @@ tbody tr:last-child td { border-bottom: none; }
   .setlist-main { padding: 1rem; }
   .setlist-header { flex-wrap: wrap; }
   .setlist-name-input { font-size: 1.05rem; min-width: 0; }
-  .setlist-header-actions { width: 100%; justify-content: flex-end; }
+  .setlist-header-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  .setlist-header-actions button {
+    width: 100%;
+    justify-content: center;
+  }
 
   #setlist-songs li { flex-wrap: wrap; }
   #setlist-songs li .drag-handle { display: none; }
