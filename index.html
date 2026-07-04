@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mein Notenkastl</title>
+<meta name="description" content="Dein Repertoire immer griffbereit">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="48x48" href="Icons/icon-48-mdpi.png">
+<link rel="icon" type="image/png" sizes="192x192" href="Icons/icon-192-xxxhdpi.png">
+<link rel="apple-touch-icon" href="Icons/icon-192-xxxhdpi.png">
+<script>
+(function () {
+  var stored = localStorage.getItem("shr_theme");
+  var theme = stored === "light" || stored === "dark"
+    ? stored
+    : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <img class="logo" src="Icons/icon-96-xhdpi.png" alt="">
+    <div class="brand-text">
+      <h1>Mein Notenkastl</h1>
+      <p class="tagline">Dein Repertoire immer griffbereit</p>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab-btn active" data-view="repertoire">Repertoire</button>
+    <button class="tab-btn" data-view="setlisten">Setlisten</button>
+    <button class="tab-btn" data-view="wunschliste">Wunschliste</button>
+  </nav>
+  <div class="io-actions">
+    <button id="btn-theme-toggle" title="Hell-/Dunkelmodus umschalten"></button>
+    <button id="btn-export" title="Alle Daten als JSON-Datei sichern">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export
+    </button>
+    <button id="btn-import" title="Daten aus JSON-Datei laden">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      Import
+    </button>
+    <input type="file" id="file-import" accept="application/json" hidden>
+  </div>
+</header>
+
+<main>
+  <!-- REPERTOIRE VIEW -->
+  <section id="view-repertoire" class="view active">
+    <div class="toolbar">
+      <input type="search" id="search-songs" placeholder="Suche nach Titel, Genre…">
+      <select id="filter-genre"><option value="">Alle Genres</option></select>
+      <select id="filter-status"><option value="">Alle Status</option></select>
+      <select id="filter-schwierigkeit">
+        <option value="">Alle Schwierigkeiten</option>
+        <option value="1">★☆☆☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="4">★★★★☆</option>
+        <option value="5">★★★★★</option>
+      </select>
+      <div class="column-picker-wrap">
+        <button id="btn-column-picker" type="button">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+          Spalten
+        </button>
+        <div id="column-picker-popover" class="popover" hidden>
+          <label><input type="checkbox" class="col-toggle" data-col="genre"> Genre</label>
+          <label><input type="checkbox" class="col-toggle" data-col="difficulty"> Schwierigkeit</label>
+          <label><input type="checkbox" class="col-toggle" data-col="status"> Status</label>
+        </div>
+      </div>
+      <button id="btn-export-songs-csv" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CSV
+      </button>
+      <button id="btn-new-song" class="primary">+ Neues Stück</button>
+    </div>
+
+    <div class="bulk-actions" id="bulk-actions" hidden>
+      <span id="bulk-count"></span>
+      <select id="bulk-setlist-select"><option value="">Setliste wählen…</option></select>
+      <button id="bulk-add-btn" class="primary">Zur Setliste hinzufügen</button>
+      <button id="bulk-clear-btn" type="button">Auswahl aufheben</button>
+    </div>
+
+    <div id="song-table-wrap" class="table-wrap">
+      <table id="song-table" class="data-table">
+        <thead>
+          <tr>
+            <th class="col-check"><input type="checkbox" id="select-all-songs" title="Alle auswählen"></th>
+            <th data-sort="title">Titel</th>
+            <th data-sort="genre" class="col-genre">Genre</th>
+            <th data-sort="difficulty" class="col-difficulty">Schwierigkeit</th>
+            <th data-sort="status" class="col-status">Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="song-table-body"></tbody>
+      </table>
+      <p id="song-empty-hint" class="empty-hint" hidden>Noch keine Stücke im Repertoire. Leg mit „+ Neues Stück“ los.</p>
+    </div>
+  </section>
+
+  <!-- SETLISTEN VIEW -->
+  <section id="view-setlisten" class="view">
+    <div class="setlist-layout">
+      <aside class="setlist-sidebar">
+        <button id="btn-new-setlist" class="primary full-width">+ Neue Setliste</button>
+        <ul id="setlist-list"></ul>
+      </aside>
+
+      <div class="setlist-main" id="setlist-main">
+        <p class="empty-hint" id="setlist-empty-hint">Wähle links eine Setliste aus oder erstelle eine neue.</p>
+
+        <div id="setlist-detail" hidden>
+          <div class="setlist-header">
+            <input type="text" id="setlist-name-input" class="setlist-name-input">
+            <div class="setlist-header-actions">
+              <button id="btn-duplicate-setlist" title="Setliste duplizieren">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Duplizieren
+              </button>
+              <button id="btn-export-setlist-csv" title="Setliste als CSV exportieren">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                CSV
+              </button>
+              <button id="btn-print-setlist" title="Setliste drucken / als PDF speichern">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                Drucken
+              </button>
+              <button id="btn-delete-setlist" class="danger" title="Setliste löschen">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+                Löschen
+              </button>
+            </div>
+          </div>
+
+          <div class="setlist-summary" id="setlist-summary"></div>
+
+          <div class="add-song-row">
+            <select id="add-song-select">
+              <option value="">– Stück zur Setliste hinzufügen –</option>
+            </select>
+          </div>
+
+          <ul id="setlist-songs"></ul>
+          <p class="empty-hint" id="setlist-songs-empty" hidden>Diese Setliste ist noch leer. Füge oben ein Stück hinzu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WUNSCHLISTE VIEW -->
+  <section id="view-wunschliste" class="view">
+    <div class="toolbar">
+      <input type="search" id="search-wishlist" placeholder="Suche nach Titel, Genre…">
+      <button id="btn-export-wishlist-csv" type="button">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        CSV
+      </button>
+      <button id="btn-new-wishlist" class="primary">+ Neuer Wunsch</button>
+    </div>
+
+    <div id="wishlist-table-wrap" class="table-wrap">
+      <table id="wishlist-table" class="data-table">
+        <thead>
+          <tr>
+            <th data-sort="title">Titel</th>
+            <th data-sort="genre">Genre</th>
+            <th data-sort="difficulty">Schwierigkeit</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="wishlist-table-body"></tbody>
+      </table>
+      <p id="wishlist-empty-hint" class="empty-hint" hidden>Noch keine Wünsche notiert. Leg mit „+ Neuer Wunsch“ los.</p>
+    </div>
+  </section>
+</main>
+
+<!-- SONG MODAL -->
+<div id="song-modal" class="modal-overlay" hidden>
+  <div class="modal">
+    <h2 id="song-modal-title">Neues Stück</h2>
+    <form id="song-form">
+      <label>Titel *
+        <input type="text" id="f-title" required>
+      </label>
+      <div class="form-row">
+        <label>Genre
+          <select id="f-genre"></select>
+        </label>
+        <label>Status
+          <select id="f-status"></select>
+        </label>
+      </div>
+      <label>Schwierigkeit
+        <select id="f-difficulty">
+          <option value="">–</option>
+          <option value="1">★☆☆☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="4">★★★★☆</option>
+          <option value="5">★★★★★</option>
+        </select>
+      </label>
+      <label>Notizen
+        <textarea id="f-notes" rows="3" placeholder="Griffschrift-Hinweise, Übe-Status, besondere Stellen…"></textarea>
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="btn-cancel-song">Abbrechen</button>
+        <button type="submit" class="primary">Speichern</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- WISHLIST MODAL -->
+<div id="wishlist-modal" class="modal-overlay" hidden>
+  <div class="modal">
+    <h2 id="wishlist-modal-title">Neuer Wunsch</h2>
+    <form id="wishlist-form">
+      <label>Titel *
+        <input type="text" id="w-title" required>
+      </label>
+      <div class="form-row">
+        <label>Genre
+          <select id="w-genre"></select>
+        </label>
+        <label>Schwierigkeit
+          <select id="w-difficulty">
+            <option value="">–</option>
+            <option value="1">★☆☆☆☆</option>
+            <option value="2">★★☆☆☆</option>
+            <option value="3">★★★☆☆</option>
+            <option value="4">★★★★☆</option>
+            <option value="5">★★★★★</option>
+          </select>
+        </label>
+      </div>
+      <label>Notizen
+        <textarea id="w-notes" rows="3" placeholder="Warum steht das Stück auf der Wunschliste?"></textarea>
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="btn-cancel-wishlist">Abbrechen</button>
+        <button type="submit" class="primary">Speichern</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PRINT VIEW (only visible when printing) -->
+<div id="print-area"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
