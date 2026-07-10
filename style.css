@@ -777,6 +777,18 @@ tbody tr:last-child td { border-bottom: none; }
   }
 }
 
+/* ---------- Footer ---------- */
+.app-footer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.app-footer a { color: var(--text-muted); text-decoration: none; }
+.app-footer a:hover { color: var(--info); text-decoration: underline; }
+
 /* ---------- Responsive: Mobile ---------- */
 @media (max-width: 640px) {
   .topbar {
